@@ -1,28 +1,172 @@
-Quien quiere ser millonario
+Quien quiere ser millonario — Documentación del Juego
+Pantallas
 
-Número de pantallas: 
-pantalla principal,
- pantalla de configuración, 
-pantalla de vídeo de intro, 
-pantalla de preguntas
-pantalla de ranking (opcional, por si al final se hace). También habrá una pantalla final de fin de partida donde se muestra la puntuación del jugador.
-Funcionamiento general: el objetivo del juego es superar 10 preguntas seguidas, cada una un poco más difícil que la anterior. Para cada número de pregunta habrá 50 posibles preguntas distintas. Por ejemplo, cuando toque la pregunta 1 se elegirá una de las 50 posibles de la pregunta 1 de forma aleatoria. Lo mismo para la 2, la 3, y así hasta la 10. Las respuestas siempre tendrán cuatro opciones: A, B, C y D. El orden de las respuestas se mostrará de manera aleatoria, de forma que la respuesta correcta a veces estará en la A, otras en la C, etc. Cada vez que el jugador acierte una pregunta sumará 100 puntos. Además habrá tres comodines: uno de 50%, uno de tiempo extra y uno de cambio de pregunta. Cada vez que el jugador use un comodín se le restarán 100 puntos de su marcador. Cada pregunta tendrá un máximo de 15 segundos para responder, salvo si se usa el comodín de tiempo.
-Pantalla principal: en la pantalla principal habrá dos botones y un tercero opcional. El primero será “Nueva partida”, el segundo “Configuración” y el tercero “Ranking”, por si al final se quiere implementar esa parte. Esta pantalla será el punto de entrada del juego.
-Acción nueva partida: al pulsar el botón de “Nueva partida” se reproducirá primero un pequeño vídeo de introducción, con la típica entrada del programa. Cuando termine el vídeo, el juego pedirá el nombre del jugador. Una vez introducido el nombre, aparecerá directamente la primera pregunta del juego.
-Preguntas: el juego tendrá 10 preguntas por partida. Para cada una de ellas habrá 50 posibles preguntas distintas almacenadas. Cuando toque la pregunta 1, se elegirá una de esas 50 al azar. Cuando toque la pregunta 2 se elegirá una de las 50 de la pregunta 2, y así hasta completar las 10. Cada pregunta se mostrará en el centro de la pantalla, en formato tarjeta. El texto de la pregunta se verá en grande y centrado, y debajo aparecerán las cuatro respuestas A, B, C y D, colocadas en dos columnas (por ejemplo A y B a la izquierda y C y D a la derecha). Antes de mostrarla, el juego mezclará las respuestas para que el orden siempre sea distinto.
-Temporizador: cada pregunta tendrá un temporizador de 15 segundos que se verá en pantalla. Si el jugador pulsa una respuesta antes de que se acabe el tiempo, el juego comprobará si es correcta o no. Si se agota el tiempo sin respuesta, la pregunta se dará por fallada automáticamente.
-Corrección de la respuesta: si el jugador acierta, el botón de la respuesta se pondrá en verde, sonará un sonido de celebración y se sumarán 100 puntos a su marcador. Después de unos instantes se pasará a la siguiente pregunta. Si el jugador falla, el botón se pondrá en rojo, sonará un “ooooh” de fallo y la partida terminará en ese momento. En ambos casos, acierto o fallo, se mostrará luego la pantalla de fin de partida con la puntuación y el número de pregunta alcanzado.
-Puntuación: el jugador empieza con 0 puntos. Cada pregunta acertada suma 100 puntos. Los comodines tienen un coste: cada vez que se use uno se restarán 100 puntos de la puntuación actual. Esto significa que un jugador que llegue más lejos pero use muchos comodines puede acabar con menos puntos que otro que haya llegado a menos preguntas pero haya gastado menos recursos.
-Comodines: habrá tres comodines disponibles por partida. Cada uno solo se puede usar una vez.
-Comodín 50%: al usarlo durante una pregunta, el juego eliminará dos respuestas incorrectas al azar. En pantalla solo quedarán una respuesta falsa y la verdadera. Al utilizar este comodín se restarán 100 puntos de la puntuación.
+Pantalla principal
 
+Pantalla de configuración
 
-Comodín de tiempo: al usarlo, el jugador ganará 1 minuto extra para responder la pregunta actual, y así tendrá tiempo de buscar en internet o pensar con calma. Este comodín solo afecta a la pregunta en curso. Al usarlo se restarán 100 puntos.
+Pantalla de vídeo de introducción
 
+Pantalla de preguntas
 
-Comodín de cambio de pregunta: al usarlo, se cambiará la pregunta actual por otra pregunta distinta del mismo nivel (por ejemplo, otra de las 50 posibles de la pregunta 4 si estás en la 4). Esto sirve por si sale una pregunta que el jugador no se sabe. Al usar este comodín también se restarán 100 puntos.
+Pantalla de ranking (opcional)
 
+Pantalla final de fin de partida
 
-Pantalla de configuración: el botón de configuración de la pantalla principal llevará a una pantalla donde se pueda gestionar el volumen. Habrá un toggle o interruptor para activar o desactivar el sonido del juego. Este ajuste afectará a los sonidos de acierto, al sonido de fallo, a la música de fondo y a cualquier otro efecto sonoro como pequeños clics de botones. El estado del volumen se puede guardar en localStorage para que se recuerde entre partidas.
-Ranking: el botón de Ranking de la pantalla principal es opcional. Si se implementa, abrirá una pantalla donde se mostrarán las puntuaciones de todas las personas que han jugado en ese dispositivo. Para cada entrada del ranking se guardará el nombre del jugador, la pregunta máxima a la que ha llegado y la puntuación total con la que ha terminado. La lista se ordenará por puntos de mayor a menor. De esta forma, se puede dar la situación de que alguien que haya llegado solo a la pregunta 6 tenga más puntos que alguien que haya llegado a la 7, si el segundo ha gastado varios comodines y ha perdido puntos con ellos.
-Fin de partida: cuando el jugador falle una pregunta o complete las 10 correctamente, se mostrará una pantalla de fin de partida. En ella se enseñará su nombre, la pregunta a la que ha llegado y su puntuación final. Desde esta pantalla habrá un botón para volver al menú principal. Si el sistema de ranking está activo, en ese momento se guardará la partida del jugador para que aparezca en la tabla de puntuaciones.
+Funcionamiento general
+
+El objetivo es superar 10 preguntas seguidas, cada una más difícil que la anterior.
+Para cada número de pregunta existen 50 preguntas posibles, y el juego elige una al azar.
+
+Todas las preguntas tienen 4 opciones (A, B, C, D), cuyo orden se mezcla antes de mostrarlas.
+
+Cada acierto: +100 puntos
+
+Cada comodín usado: –100 puntos
+
+Tiempo por pregunta: 15 segundos, salvo si se usa el comodín de tiempo
+
+Pantalla principal
+
+Incluye:
+
+Nueva partida
+
+Configuración
+
+Ranking (opcional)
+
+Esta pantalla es el punto de entrada al juego.
+
+Nueva partida
+
+Se reproduce un vídeo de introducción.
+
+Se pide el nombre del jugador.
+
+Comienza la pregunta 1.
+
+Preguntas
+
+Hay 10 preguntas por partida.
+Para cada nivel (1 a 10), hay 50 variantes posibles, y se selecciona una al azar.
+
+Visualización
+
+La pregunta aparece centrada, en formato tarjeta.
+
+Debajo, las respuestas A, B, C y D en dos columnas.
+
+Las respuestas se mezclan antes de mostrarse.
+
+Temporizador
+
+Cada pregunta dispone de 15 segundos.
+
+Si el tiempo llega a 0 → se considera fallada.
+
+Si el jugador responde antes, el juego comprueba el resultado.
+
+Corrección de la respuesta
+
+Acierto
+
+El botón se vuelve verde
+
+Suena un efecto positivo
+
+Se suman 100 puntos
+
+Tras un momento, pasa a la siguiente pregunta
+
+Fallo
+
+El botón se vuelve rojo
+
+Suena un “ooooh”
+
+La partida termina
+
+Se muestra la pantalla final
+
+En ambos casos, después se muestra la pantalla de fin de partida con la puntuación y la última pregunta alcanzada.
+
+Puntuación
+
+Inicio: 0 puntos
+
+Cada acierto: +100
+
+Cada comodín usado: –100
+
+Un jugador que llegue menos lejos pero use menos comodines puede superar a otro que haya fallado más tarde.
+
+Comodines disponibles (uno de cada por partida)
+1. Comodín 50%
+
+Elimina dos respuestas incorrectas al azar
+
+Quedan: 1 respuesta falsa + la correcta
+
+Coste: –100 puntos
+
+2. Comodín de tiempo
+
+Añade 1 minuto extra para la pregunta actual
+
+Coste: –100 puntos
+
+3. Comodín de cambio de pregunta
+
+Cambia la pregunta actual por otra distinta del mismo nivel
+
+Coste: –100 puntos
+
+Pantalla de configuración
+
+Aquí se gestiona el volumen del juego mediante un interruptor (sonido ON/OFF).
+
+Afecta a:
+
+Sonidos de acierto
+
+Sonido de fallo
+
+Música de fondo
+
+Efectos de botones
+
+El estado del sonido se guarda en localStorage.
+
+Ranking (opcional)
+
+Si se activa, mostrará las partidas guardadas con:
+
+Nombre del jugador
+
+Pregunta máxima alcanzada
+
+Puntuación final
+
+La lista se ordena de mayor a menor puntuación.
+
+Puede darse el caso de que alguien con menor progreso tenga más puntos si ha usado menos comodines.
+
+Fin de partida
+
+Se llega aquí cuando:
+
+El jugador falla una pregunta
+
+O completa las 10 preguntas
+
+La pantalla muestra:
+
+Nombre del jugador
+
+Pregunta alcanzada
+
+Puntuación final
+
+Incluye un botón para volver al menú principal.
+Si el ranking está activo, la información se guarda automáticamente.
