@@ -1,16 +1,49 @@
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-align: center;
-  min-height: 100vh;
+
   background: linear-gradient(
     180deg,
     #4f46e5 0%,
     #4338ca 40%,
     #312e81 100%
   );
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   color: white;
+}
+
+
+
+.screen {
+  padding-top: 40px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.active-screen {
+  display: block !important;
+}
+
+
+
+#global-header {
+  text-align: center;
 }
 
 .logo {
@@ -18,6 +51,8 @@ body {
   max-width: 220px;
   height: auto;
 }
+
+
 
 .button-container {
   margin-top: 60px;
@@ -39,4 +74,65 @@ body {
 
 .button:hover {
   background-color: #273ea8;
+}
+
+
+
+#question-screen {
+  background-image: url("./assets/background for questions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.question-banner {
+  background: #9a2abf;
+  padding: 18px 30px;
+  border-radius: 20px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  max-width: 70%;
+  margin: 100px auto 0 auto; 
+}
+
+
+.answers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 80%;
+  max-width: 700px;
+  margin: 20px auto 0 auto;
+}
+
+.answer-block {
+  padding: 18px;
+  border-radius: 16px;
+  background: #273ea8;
+  border: 2px solid #ffffff99;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.answer-block:hover {
+  background: #1e3a8a;
+}
+
+.answer-correct {
+  background-color: #1fa739 !important;
+  border-color: #25c246 !important;
+}
+
+.answer-wrong {
+  background-color: #c62828 !important;
+  border-color: #e53935 !important;
 }

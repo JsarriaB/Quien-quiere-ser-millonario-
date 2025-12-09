@@ -7,22 +7,60 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="./assets/Logo_WWTBAM_Spain.png" />
 </head>
+
 <body>
-  <header>
+
+ 
+  <header id="home-header" class="screen active-screen">
     <img
       src="./assets/Logo_WWTBAM_Spain.png"
-      alt="Who Wants To Be A Millionaire Logo"
+      alt="Logo Home"
       class="logo"
     />
   </header>
 
-  <main class="button-container">
-    <button class="button">New Game</button>
-    <button class="button">Settings</button>
-    <button class="button">ranking (optional)</button>
+  <main>
+
+    <section id="main-menu" class="screen active-screen">
+      <div class="button-container">
+        <button id="btn-new-game" class="button">New Game</button>
+        <button class="button">Settings</button>
+        <button class="button">Ranking (optional)</button>
+      </div>
+    </section>
+
+ 
+    <section id="question-screen" class="screen hidden">
+
+     
+      <div id="question-logo-wrapper">
+        <img
+          src="./assets/Logo_WWTBAM_Spain.png"
+          alt="Logo Questions"
+          class="logo"
+        />
+      </div>
+
+      <div class="question-banner">
+        What is the capital of Mongolia?
+      </div>
+
+      
+      <div class="answers-grid">
+        <button class="answer-block" data-correct="false">Baghdad</button>
+        <button class="answer-block" data-correct="false">Jakarta</button>
+        <button class="answer-block" data-correct="false">Bishkek</button>
+        <button class="answer-block" data-correct="true">Ulaanbaatar</button>
+      </div>
+
+      <p id="feedback-message" class="feedback-message"></p>
+
+    </section>
+
   </main>
 
-  <footer>
-  </footer>
+  <footer></footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
