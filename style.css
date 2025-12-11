@@ -26,11 +26,11 @@ body {
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 .active-screen {
-  display: block !important;
+  display: block;
 }
 
 .logo {
@@ -39,11 +39,11 @@ body {
   height: auto;
 }
 
-#home-header {
+.home-header {
   text-align: center;
 }
 
-#question-logo-wrapper {
+.question-logo-wrapper {
   text-align: center;
   margin-top: 40px;
 }
@@ -70,7 +70,7 @@ body {
   background-color: #273ea8;
 }
 
-#question-screen {
+.question-screen {
   background-image: url("./assets/background for questions.jpg");
   background-size: cover;
   background-position: center;
@@ -119,12 +119,17 @@ body {
 }
 
 .answer-correct {
-  background-color: #1fa739 !important;
-  border-color: #25c246 !important;
+  background-color: #1fa739;
+  border-color: #25c246;
 }
 
 .answer-wrong {
-  background-color: #c62828 !important;
-  border-color: #e53935 !important;
+  background-color: #c62828;
+  border-color: #e53935;
 }
 
+.feedback-message {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-weight: 700;
+}

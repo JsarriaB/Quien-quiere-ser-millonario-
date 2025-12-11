@@ -21,10 +21,10 @@ const questions = [
 
 let currentQuestionIndex = 0
 
-const buttonNewGame = document.querySelector("#btn-new-game")
-const mainMenu = document.querySelector("#main-menu")
-const questionScreen = document.querySelector("#question-screen")
-const homeHeader = document.querySelector("#home-header")  
+const buttonNewGame = document.querySelector(".btn-new-game")
+const mainMenu = document.querySelector(".main-menu")
+const questionScreen = document.querySelector(".question-screen")
+const homeHeader = document.querySelector(".home-header")  
 const questionBanner = document.querySelector(".question-banner")
 const answersGrid = document.querySelector(".answers-grid")
 
