@@ -10,8 +10,7 @@
 
 <body>
 
- 
-  <header id="home-header" class="screen active-screen">
+  <header class="home-header screen active-screen">
     <img
       src="./assets/Logo_WWTBAM_Spain.png"
       alt="Logo Home"
@@ -21,19 +20,17 @@
 
   <main>
 
-    <section id="main-menu" class="screen active-screen">
+    <section class="main-menu screen active-screen">
       <div class="button-container">
-        <button id="btn-new-game" class="button">New Game</button>
-        <button class="button">Settings</button>
+        <button class="btn-new-game button">Jugar</button>
+        <button class="button">Ajustes</button>
         <button class="button">Ranking (optional)</button>
       </div>
     </section>
 
- 
-    <section id="question-screen" class="screen hidden">
+    <section class="question-screen screen hidden">
 
-     
-      <div id="question-logo-wrapper">
+      <div class="question-logo-wrapper">
         <img
           src="./assets/Logo_WWTBAM_Spain.png"
           alt="Logo Questions"
@@ -41,19 +38,11 @@
         />
       </div>
 
-      <div class="question-banner">
-        What is the capital of Mongolia?
-      </div>
+      <div class="question-banner"></div>
 
-      
-      <div class="answers-grid">
-        <button class="answer-block" data-correct="false">Baghdad</button>
-        <button class="answer-block" data-correct="false">Jakarta</button>
-        <button class="answer-block" data-correct="false">Bishkek</button>
-        <button class="answer-block" data-correct="true">Ulaanbaatar</button>
-      </div>
+      <div class="answers-grid"></div>
 
-      <p id="feedback-message" class="feedback-message"></p>
+      <p class="feedback-message"></p>
 
     </section>
 

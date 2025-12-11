@@ -1,44 +1,86 @@
-document.addEventListener("DOMContentLoaded", () => {
+const questions = [
+  {
+    question: "¿Cuál es la capital de Mongolia?",
+    answers: [
+      { text: "Bagdad", correct: false },
+      { text: "Yakarta", correct: false },
+      { text: "Biskek", correct: false },
+      { text: "Ulán Bator", correct: true }
+    ]
+  },
+  {
+    question: "¿Quién descubrió la penicilina?",
+    answers: [
+      { text: "Louis Pasteur", correct: false },
+      { text: "Alexander Fleming", correct: true },
+      { text: "Robert Koch", correct: false },
+      { text: "Joseph Lister", correct: false }
+    ]
+  }
+]
 
-  const btnNewGame = document.getElementById("btn-new-game");
-  const mainMenu = document.getElementById("main-menu");
-  const questionScreen = document.getElementById("question-screen");
-  const answerButtons = document.querySelectorAll(".answer-block");
+let currentQuestionIndex = 0
 
+const buttonNewGame = document.querySelector(".btn-new-game")
+const mainMenu = document.querySelector(".main-menu")
+const questionScreen = document.querySelector(".question-screen")
+const homeHeader = document.querySelector(".home-header")  
+const questionBanner = document.querySelector(".question-banner")
+const answersGrid = document.querySelector(".answers-grid")
+
+buttonNewGame.addEventListener("click", () => {
+  currentQuestionIndex = 0
   
-  btnNewGame.addEventListener("click", () => {
+  mainMenu.classList.remove("active-screen")
+  mainMenu.classList.add("hidden")
+  
+  homeHeader.classList.remove("active-screen")  
+  homeHeader.classList.add("hidden")             
 
-    mainMenu.classList.remove("active-screen");
-    mainMenu.classList.add("hidden");
+  questionScreen.classList.remove("hidden")
+  questionScreen.classList.add("active-screen")
+  
+  loadQuestion(currentQuestionIndex)
+})
 
+function loadQuestion(index) {
+  const currentQuestion = questions[index]
+  
+  questionBanner.textContent = currentQuestion.question
+  
+  answersGrid.innerHTML = ""
+  
+  currentQuestion.answers.forEach(answer => {
+    const button = document.createElement("button")
+    button.classList.add("answer-block")
+    button.textContent = answer.text
+    button.dataset.correct = String(answer.correct)
     
-    questionScreen.classList.remove("hidden");
-    questionScreen.classList.add("active-screen");
-
-  });
-
- 
-  answerButtons.forEach(button => {
     button.addEventListener("click", () => {
-
-      const isCorrect = button.dataset.correct === "true";
+      const isCorrect = button.dataset.correct === "true"
 
       if (isCorrect) {
-        button.classList.add("answer-correct");
+        button.classList.add("answer-correct")
+        
+        setTimeout(() => {
+          currentQuestionIndex++
+          loadQuestion(currentQuestionIndex)
+        }, 2000)
+        
       } else {
-        button.classList.add("answer-wrong");
+        button.classList.add("answer-wrong")
       }
 
-      
-      answerButtons.forEach(btn => {
+      const allButtons = document.querySelectorAll(".answer-block")
+      allButtons.forEach(eachButton => {
+        eachButton.disabled = true
 
-        btn.disabled = true;
-
-        if (btn.dataset.correct === "true" && btn !== button) {
-          btn.classList.add("answer-correct");
+        if (eachButton.dataset.correct === "true" && eachButton !== button) {
+          eachButton.classList.add("answer-correct")
         }
-      });
-    });
-  });
-
-});
+      })
+    })
+    
+    answersGrid.appendChild(button)
+  })
+}
