@@ -133,3 +133,29 @@ body {
   margin-top: 10px;
   font-weight: 700;
 }
+
+/*contador*/
+
+.question-counter{
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  background: #9a2abf;
+  padding: 30px 80px;
+  border-radius: 12px;
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.timer{
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  background: #9a2abf;
+  padding: 30px 80px;
+  border-radius: 12px;
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
+}

@@ -16,57 +16,161 @@ const questions = [
       { text: "Robert Koch", correct: false },
       { text: "Joseph Lister", correct: false }
     ]
+  },
+  {
+    question: "¿En qué año se inventó la imprenta moderna?",
+    answers: [
+      { text: "1440", correct: true },
+      { text: "1492", correct: false },
+      { text: "1520", correct: false },
+      { text: "1375", correct: false }
+    ]
+  },
+  {
+    question: "¿Cuál NO es una de las 7 maravillas del mundo moderno?",
+    answers: [
+      { text: "Cristo Redentor", correct: false },
+      { text: "Torre Eiffel", correct: true },
+      { text: "Machu Picchu", correct: false },
+      { text: "Coliseo", correct: false }
+    ]
+  },
+  {
+    question: "¿De qué está compuesto principalmente un cometa?",
+    answers: [
+      { text: "Roca y metal", correct: false },
+      { text: "Hielo y polvo", correct: true },
+      { text: "Gas helio", correct: false },
+      { text: "Magma congelado", correct: false }
+    ]
+  },
+  {
+    question: "¿Cuánto tarda la luz del Sol en llegar a la Tierra?",
+    answers: [
+      { text: "8 minutos y 20 segundos", correct: true },
+      { text: "3 minutos", correct: false },
+      { text: "15 minutos", correct: false },
+      { text: "1 hora", correct: false }
+    ]
+  },
+  {
+    question: "¿Cuántas capas tiene la atmósfera terrestre?",
+    answers: [
+      { text: "3", correct: false },
+      { text: "5", correct: true },
+      { text: "7", correct: false },
+      { text: "4", correct: false }
+    ]
+  },
+  {
+    question: "¿Cuál es el océano más profundo del mundo?",
+    answers: [
+      { text: "Atlántico", correct: false },
+      { text: "Índico", correct: false },
+      { text: "Pacífico", correct: true },
+      { text: "Ártico", correct: false }
+    ]
+  },
+  {
+    question: "¿En qué año cayó el Muro de Berlín?",
+    answers: [
+      { text: "1987", correct: false },
+      { text: "1989", correct: true },
+      { text: "1991", correct: false },
+      { text: "1985", correct: false }
+    ]
+  },
+  {
+    question: "¿Cuántos huesos tiene el cuerpo humano adulto?",
+    answers: [
+      { text: "198", correct: false },
+      { text: "206", correct: true },
+      { text: "215", correct: false },
+      { text: "189", correct: false }
+    ]
   }
 ]
 
 let currentQuestionIndex = 0
+let countdown = null
 
 const buttonNewGame = document.querySelector(".btn-new-game")
 const mainMenu = document.querySelector(".main-menu")
 const questionScreen = document.querySelector(".question-screen")
-const homeHeader = document.querySelector(".home-header")  
+const homeHeader = document.querySelector(".home-header")
 const questionBanner = document.querySelector(".question-banner")
 const answersGrid = document.querySelector(".answers-grid")
+const questionCounter = document.querySelector(".question-counter")
+const timerForQuestions = document.querySelector(".timer")
 
 buttonNewGame.addEventListener("click", () => {
   currentQuestionIndex = 0
-  
+
   mainMenu.classList.remove("active-screen")
   mainMenu.classList.add("hidden")
-  
-  homeHeader.classList.remove("active-screen")  
-  homeHeader.classList.add("hidden")             
+
+  homeHeader.classList.remove("active-screen")
+  homeHeader.classList.add("hidden")
 
   questionScreen.classList.remove("hidden")
   questionScreen.classList.add("active-screen")
-  
+
   loadQuestion(currentQuestionIndex)
 })
 
 function loadQuestion(index) {
   const currentQuestion = questions[index]
-  
+
   questionBanner.textContent = currentQuestion.question
-  
+  questionCounter.textContent = `Pregunta ${currentQuestionIndex + 1}/10`
+
   answersGrid.innerHTML = ""
-  
+
+  if (countdown) {
+    clearInterval(countdown)
+  }
+
+  let timeLeft = 30
+  timerForQuestions.textContent = timeLeft
+
+  countdown = setInterval(() => {
+    timeLeft--
+    timerForQuestions.textContent = timeLeft
+
+    if (timeLeft === 0) {
+      clearInterval(countdown)
+      alert("¡Tiempo agotado! Has perdido.")
+
+      questionScreen.classList.remove("active-screen")
+      questionScreen.classList.add("hidden")
+
+      mainMenu.classList.remove("hidden")
+      mainMenu.classList.add("active-screen")
+
+      homeHeader.classList.remove("hidden")
+      homeHeader.classList.add("active-screen")
+    }
+  }, 1000)
+
   currentQuestion.answers.forEach(answer => {
     const button = document.createElement("button")
     button.classList.add("answer-block")
     button.textContent = answer.text
     button.dataset.correct = String(answer.correct)
-    
+
     button.addEventListener("click", () => {
+      clearInterval(countdown)
+
       const isCorrect = button.dataset.correct === "true"
 
       if (isCorrect) {
         button.classList.add("answer-correct")
-        
+
         setTimeout(() => {
           currentQuestionIndex++
           loadQuestion(currentQuestionIndex)
         }, 2000)
-        
+
       } else {
         button.classList.add("answer-wrong")
       }
@@ -80,7 +184,7 @@ function loadQuestion(index) {
         }
       })
     })
-    
+
     answersGrid.appendChild(button)
   })
 }
