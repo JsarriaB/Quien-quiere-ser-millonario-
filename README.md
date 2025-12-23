@@ -62,7 +62,13 @@ Muestra partidas jugadas en ese dispositivo:
 Ordenado de mayor a menor.
 
 Fin de partida
+
+
+Documento: https://docs.google.com/document/d/1MtKkNticc9uPB4TJnYFEmkHsN-q9mPiTU1KYJWxIBEM/edit?tab=t.pmhtukkkekz7
+
+Trell: https://trello.com/invite/b/692c71cf9961b0105138c059/ATTIb29dd4b24a586c1a5f47dcf5877a799c061B6F9A/wwtbam
 Se alcanza cuando se falla o se completan las 10 preguntas.
 Se muestra nombre, última pregunta alcanzada y puntos.
 Si el ranking está activo, se guarda la partida.
+
 
