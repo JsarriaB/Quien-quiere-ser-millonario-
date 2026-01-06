@@ -50,12 +50,18 @@ body {
   border: none;
   background-color: #3b82f6;
   color: white;
-  font-size: 1rem;
+  font-size: 16px; 
   cursor: pointer;
 }
 
 .button:hover {
   background-color: #2563eb;
+}
+
+/* Estado deshabilitado */
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 /* PANTALLA DE PREGUNTAS */
@@ -69,13 +75,34 @@ body {
   inset: 0;
 }
 
+/* Botones de comodines */
+.lifeline-btn {
+  position: absolute;
+  bottom: 40px;
+}
+
+.lifeline-left {
+  left: 40px;
+}
+
+.lifeline-right {
+  right: 40px;
+}
+
+/* Estilo cuando ya se ha usado un comodín */
+#time-lifeline.lifeline-used,
+#fifty-fifty.lifeline-used {
+  background-color: #d1d5db; /* gris pálido */
+  color: #6b7280;
+}
+
 /* PREGUNTA */
 
 .question-banner {
   background: #60a5fa;
   padding: 18px 30px;
   border-radius: 20px;
-  font-size: 1.5rem;
+  font-size: 24px; 
   font-weight: 700;
   max-width: 70%;
   margin: 350px auto 0;
@@ -99,7 +126,7 @@ body {
   border: 2px solid #ffffff99;
   color: white;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 19px; 
   font-weight: 600;
 }
 
@@ -165,11 +192,11 @@ body {
 }
 
 .modal-content h2 {
-  font-size: 2rem;
+  font-size: 32px; 
   margin-bottom: 10px;
 }
 
 .modal-content p {
-  font-size: 1.2rem;
+  font-size: 19px; 
   margin-bottom: 30px;
 }
