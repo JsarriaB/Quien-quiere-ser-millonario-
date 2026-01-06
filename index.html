@@ -29,30 +29,35 @@
     </section>
 
     <section class="question-screen screen hidden">
-
-      <div class="question-logo-wrapper">
-        <img
-          src="./assets/Logo_WWTBAM_Spain.png"
-          alt="Logo Questions"
-          class="logo"
-        />
-      </div>
       <div class="timer"></div>
-
       <div class="question-counter"></div>
 
+
+      <button id="time-lifeline" class="button lifeline-btn lifeline-left">
+        +60s
+      </button>
+
+  
+      <button id="fifty-fifty" class="button lifeline-btn lifeline-right">
+        50/50
+      </button>
+
       <div class="question-banner"></div>
-
       <div class="answers-grid"></div>
-
-      <p class="feedback-message"></p>
-
     </section>
 
   </main>
 
-  <footer></footer>
+  <div class="modal hidden" id="game-over-modal">
+    <div class="modal-content">
+      <h2>Has perdido</h2>
+      <p>Mejor suerte la próxima vez</p>
+      <button class="button" id="back-to-menu">Volver al inicio</button>
+    </div>
+  </div>
 
+  <script src="questions.js"></script>
   <script src="main.js"></script>
+
 </body>
 </html>

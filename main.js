@@ -1,98 +1,9 @@
-const questions = [
-  {
-    question: "¿Cuál es la capital de Mongolia?",
-    answers: [
-      { text: "Bagdad", correct: false },
-      { text: "Yakarta", correct: false },
-      { text: "Biskek", correct: false },
-      { text: "Ulán Bator", correct: true }
-    ]
-  },
-  {
-    question: "¿Quién descubrió la penicilina?",
-    answers: [
-      { text: "Louis Pasteur", correct: false },
-      { text: "Alexander Fleming", correct: true },
-      { text: "Robert Koch", correct: false },
-      { text: "Joseph Lister", correct: false }
-    ]
-  },
-  {
-    question: "¿En qué año se inventó la imprenta moderna?",
-    answers: [
-      { text: "1440", correct: true },
-      { text: "1492", correct: false },
-      { text: "1520", correct: false },
-      { text: "1375", correct: false }
-    ]
-  },
-  {
-    question: "¿Cuál NO es una de las 7 maravillas del mundo moderno?",
-    answers: [
-      { text: "Cristo Redentor", correct: false },
-      { text: "Torre Eiffel", correct: true },
-      { text: "Machu Picchu", correct: false },
-      { text: "Coliseo", correct: false }
-    ]
-  },
-  {
-    question: "¿De qué está compuesto principalmente un cometa?",
-    answers: [
-      { text: "Roca y metal", correct: false },
-      { text: "Hielo y polvo", correct: true },
-      { text: "Gas helio", correct: false },
-      { text: "Magma congelado", correct: false }
-    ]
-  },
-  {
-    question: "¿Cuánto tarda la luz del Sol en llegar a la Tierra?",
-    answers: [
-      { text: "8 minutos y 20 segundos", correct: true },
-      { text: "3 minutos", correct: false },
-      { text: "15 minutos", correct: false },
-      { text: "1 hora", correct: false }
-    ]
-  },
-  {
-    question: "¿Cuántas capas tiene la atmósfera terrestre?",
-    answers: [
-      { text: "3", correct: false },
-      { text: "5", correct: true },
-      { text: "7", correct: false },
-      { text: "4", correct: false }
-    ]
-  },
-  {
-    question: "¿Cuál es el océano más profundo del mundo?",
-    answers: [
-      { text: "Atlántico", correct: false },
-      { text: "Índico", correct: false },
-      { text: "Pacífico", correct: true },
-      { text: "Ártico", correct: false }
-    ]
-  },
-  {
-    question: "¿En qué año cayó el Muro de Berlín?",
-    answers: [
-      { text: "1987", correct: false },
-      { text: "1989", correct: true },
-      { text: "1991", correct: false },
-      { text: "1985", correct: false }
-    ]
-  },
-  {
-    question: "¿Cuántos huesos tiene el cuerpo humano adulto?",
-    answers: [
-      { text: "198", correct: false },
-      { text: "206", correct: true },
-      { text: "215", correct: false },
-      { text: "189", correct: false }
-    ]
-  }
-]
-
 let currentQuestionIndex = 0
 let countdown = null
+let timeLeft = 30
+
+let timeLifelineUsed = false
+let fiftyFiftyUsed = false
 
 const buttonNewGame = document.querySelector(".btn-new-game")
 const mainMenu = document.querySelector(".main-menu")
@@ -103,13 +14,29 @@ const answersGrid = document.querySelector(".answers-grid")
 const questionCounter = document.querySelector(".question-counter")
 const timerForQuestions = document.querySelector(".timer")
 
+const gameOverModal = document.getElementById("game-over-modal")
+const backToMenuBtn = document.getElementById("back-to-menu")
+
+const timeLifelineBtn = document.getElementById("time-lifeline")
+const fiftyFiftyBtn = document.getElementById("fifty-fifty")
+
 buttonNewGame.addEventListener("click", () => {
   currentQuestionIndex = 0
 
-  mainMenu.classList.remove("active-screen")
-  mainMenu.classList.add("hidden")
+  timeLifelineUsed = false
+  fiftyFiftyUsed = false
 
-  homeHeader.classList.remove("active-screen")
+  if (timeLifelineBtn) {
+    timeLifelineBtn.classList.remove("lifeline-used")
+    timeLifelineBtn.disabled = false
+  }
+
+  if (fiftyFiftyBtn) {
+    fiftyFiftyBtn.classList.remove("lifeline-used")
+    fiftyFiftyBtn.disabled = false
+  }
+
+  mainMenu.classList.add("hidden")
   homeHeader.classList.add("hidden")
 
   questionScreen.classList.remove("hidden")
@@ -118,37 +45,87 @@ buttonNewGame.addEventListener("click", () => {
   loadQuestion(currentQuestionIndex)
 })
 
+if (timeLifelineBtn) {
+  timeLifelineBtn.addEventListener("click", () => {
+    if (timeLifelineUsed) return
+
+    timeLeft += 60
+    timerForQuestions.textContent = timeLeft
+
+    timeLifelineUsed = true
+    timeLifelineBtn.classList.add("lifeline-used")
+    timeLifelineBtn.disabled = true
+  })
+}
+
+if (fiftyFiftyBtn) {
+  fiftyFiftyBtn.addEventListener("click", () => {
+    if (fiftyFiftyUsed) return
+
+    applyFiftyFifty()
+
+    fiftyFiftyUsed = true
+    fiftyFiftyBtn.classList.add("lifeline-used")
+    fiftyFiftyBtn.disabled = true
+  })
+}
+
+function applyFiftyFifty() {
+  const answerButtons = Array.from(document.querySelectorAll(".answer-block"))
+
+  const correctButtons = answerButtons.filter(btn => btn.dataset.correct === "true")
+  const wrongButtons = answerButtons.filter(btn => btn.dataset.correct !== "true")
+
+
+  if (correctButtons.length !== 1 || wrongButtons.length < 2) return
+
+  wrongButtons.sort(() => Math.random() - 0.5)
+
+  wrongButtons[0].style.display = "none"
+  wrongButtons[1].style.display = "none"
+}
+
+function showGameOver() {
+  if (countdown) clearInterval(countdown)
+
+  gameOverModal.classList.remove("hidden")
+
+  backToMenuBtn.onclick = () => {
+    gameOverModal.classList.add("hidden")
+
+    questionScreen.classList.add("hidden")
+    questionScreen.classList.remove("active-screen")
+
+    mainMenu.classList.remove("hidden")
+    mainMenu.classList.add("active-screen")
+
+    homeHeader.classList.remove("hidden")
+    homeHeader.classList.add("active-screen")
+  }
+}
+
 function loadQuestion(index) {
   const currentQuestion = questions[index]
 
   questionBanner.textContent = currentQuestion.question
-  questionCounter.textContent = `Pregunta ${currentQuestionIndex + 1}/10`
-
+  questionCounter.textContent = `Pregunta ${index + 1}/${questions.length}`
   answersGrid.innerHTML = ""
 
-  if (countdown) {
-    clearInterval(countdown)
-  }
+  if (countdown) clearInterval(countdown)
 
-  let timeLeft = 30
+  timeLeft = 30
   timerForQuestions.textContent = timeLeft
+
+
+  if (timeLifelineBtn) timeLifelineBtn.disabled = timeLifelineUsed
+  if (fiftyFiftyBtn) fiftyFiftyBtn.disabled = fiftyFiftyUsed
 
   countdown = setInterval(() => {
     timeLeft--
     timerForQuestions.textContent = timeLeft
 
     if (timeLeft === 0) {
-      clearInterval(countdown)
-      alert("¡Tiempo agotado! Has perdido.")
-
-      questionScreen.classList.remove("active-screen")
-      questionScreen.classList.add("hidden")
-
-      mainMenu.classList.remove("hidden")
-      mainMenu.classList.add("active-screen")
-
-      homeHeader.classList.remove("hidden")
-      homeHeader.classList.add("active-screen")
+      showGameOver()
     }
   }, 1000)
 
@@ -156,33 +133,34 @@ function loadQuestion(index) {
     const button = document.createElement("button")
     button.classList.add("answer-block")
     button.textContent = answer.text
-    button.dataset.correct = String(answer.correct)
+
+
+    button.dataset.correct = answer.correct ? "true" : "false"
 
     button.addEventListener("click", () => {
       clearInterval(countdown)
 
-      const isCorrect = button.dataset.correct === "true"
+      document.querySelectorAll(".answer-block").forEach(b => (b.disabled = true))
 
-      if (isCorrect) {
+
+      if (timeLifelineBtn) timeLifelineBtn.disabled = true
+      if (fiftyFiftyBtn) fiftyFiftyBtn.disabled = true
+
+      if (answer.correct) {
         button.classList.add("answer-correct")
 
         setTimeout(() => {
           currentQuestionIndex++
-          loadQuestion(currentQuestionIndex)
-        }, 2000)
-
+          if (currentQuestionIndex < questions.length) {
+            loadQuestion(currentQuestionIndex)
+          } else {
+            showGameOver()
+          }
+        }, 1500)
       } else {
         button.classList.add("answer-wrong")
+        setTimeout(showGameOver, 1500)
       }
-
-      const allButtons = document.querySelectorAll(".answer-block")
-      allButtons.forEach(eachButton => {
-        eachButton.disabled = true
-
-        if (eachButton.dataset.correct === "true" && eachButton !== button) {
-          eachButton.classList.add("answer-correct")
-        }
-      })
     })
 
     answersGrid.appendChild(button)
